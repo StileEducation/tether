@@ -348,18 +348,18 @@ TetherBase.modules.push({
       if (pinned.indexOf('top') >= 0 || pinned.indexOf('bottom') >= 0) {
         eAttachment.top = tAttachment.top = false;
       }
-
-      if (tAttachment.top !== targetAttachment.top ||
-          tAttachment.left !== targetAttachment.left ||
-          eAttachment.top !== this.attachment.top ||
-          eAttachment.left !== this.attachment.left) {
-        this.updateAttachClasses(eAttachment, tAttachment);
-        this.trigger('update', {
-          attachment: eAttachment,
-          targetAttachment: tAttachment,
-        });
-      }
     });
+
+    if (tAttachment.top !== targetAttachment.top ||
+        tAttachment.left !== targetAttachment.left ||
+        eAttachment.top !== this.attachment.top ||
+        eAttachment.left !== this.attachment.left) {
+      this.updateAttachClasses(eAttachment, tAttachment);
+      this.trigger('update', {
+        attachment: eAttachment,
+        targetAttachment: tAttachment,
+      });
+    }
 
     defer(() => {
       if (!(this.options.addTargetClasses === false)) {
