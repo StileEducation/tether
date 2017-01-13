@@ -1506,32 +1506,30 @@ TetherBase.modules.push({
       }
 
       if (changeAttachX === 'together') {
-        if (left < bounds[0] && tAttachment.left === 'left') {
-          if (eAttachment.left === 'right') {
+        if (tAttachment.left === 'left') {
+          if (eAttachment.left === 'right' && left < bounds[0]) {
             left += targetWidth;
             tAttachment.left = 'right';
 
             left += width;
             eAttachment.left = 'left';
-          } else if (eAttachment.left === 'left') {
-            left += targetWidth;
+          } else if (eAttachment.left === 'left' && left + width > bounds[2] && left - (width - targetWidth) >= bounds[0]) {
+            left -= width - targetWidth;
             tAttachment.left = 'right';
 
-            left -= width;
             eAttachment.left = 'right';
           }
-        } else if (left + width > bounds[2] && tAttachment.left === 'right') {
-          if (eAttachment.left === 'left') {
+        } else if (tAttachment.left === 'right') {
+          if (eAttachment.left === 'left' && left + width > bounds[2]) {
             left -= targetWidth;
             tAttachment.left = 'left';
 
             left -= width;
             eAttachment.left = 'right';
-          } else if (eAttachment.left === 'right') {
-            left -= targetWidth;
+          } else if (eAttachment.left === 'right' && left < bounds[0] && left + (2 * width - targetWidth) <= bounds[2]) {
+            left += width - targetWidth;
             tAttachment.left = 'left';
 
-            left += width;
             eAttachment.left = 'left';
           }
         } else if (tAttachment.left === 'center') {
